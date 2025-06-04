@@ -28,5 +28,5 @@
 ../USB_DEVICE/Target/usbd_conf.c:808:6:HAL_PCDEx_LPM_Callback	16	static
 ../USB_DEVICE/Target/usbd_conf.c:843:6:USBD_LL_Delay	16	static
 ../USB_DEVICE/Target/usbd_conf.c:853:7:USBD_static_malloc	16	static
-../USB_DEVICE/Target/usbd_conf.c:874:6:USBD_static_free	16	static
-../USB_DEVICE/Target/usbd_conf.c:885:13:SystemClockConfig_Resume	8	static
+../USB_DEVICE/Target/usbd_conf.c:864:6:USBD_static_free	16	static
+../USB_DEVICE/Target/usbd_conf.c:875:13:SystemClockConfig_Resume	8	static

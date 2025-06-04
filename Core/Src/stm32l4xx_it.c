@@ -41,13 +41,7 @@
 
 /* Private variables ---------------------------------------------------------*/
 /* USER CODE BEGIN PV */
-extern int16_t* audiobuf;
-extern uint8_t available;
-extern DAC_HandleTypeDef hdac1;
-extern int16_t queue[256][24];
-extern uint8_t queue_idx;
-float gain = 1;
-uint8_t effect = 200;
+
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -62,7 +56,6 @@ uint8_t effect = 200;
 
 /* External variables --------------------------------------------------------*/
 extern PCD_HandleTypeDef hpcd_USB_OTG_FS;
-extern DAC_HandleTypeDef hdac1;
 extern TIM_HandleTypeDef htim7;
 /* USER CODE BEGIN EV */
 
@@ -242,46 +235,14 @@ void EXTI15_10_IRQHandler(void)
 }
 
 /**
-  * @brief This function handles TIM6 global interrupt, DAC channel1 and channel2 underrun error interrupts.
-  */
-void TIM6_DAC_IRQHandler(void)
-{
-  /* USER CODE BEGIN TIM6_DAC_IRQn 0 */
-
-  /* USER CODE END TIM6_DAC_IRQn 0 */
-  HAL_DAC_IRQHandler(&hdac1);
-  /* USER CODE BEGIN TIM6_DAC_IRQn 1 */
-
-  /* USER CODE END TIM6_DAC_IRQn 1 */
-}
-
-/**
   * @brief This function handles TIM7 global interrupt.
   */
 void TIM7_IRQHandler(void)
 {
   /* USER CODE BEGIN TIM7_IRQn 0 */
-  static int i = 0; // explicar por qué static
-  float data;
-  if (available == 1)
-  {
-	  data = ((float) audiobuf[i] + (float)(gain*queue[(uint8_t)(queue_idx - effect)][i]) +
-			  (float) (gain*queue[(uint8_t)(queue_idx - effect - 1)][i])) / 3;
-	  data = data * 2048.0 / 32768; // escalado de 16 -> 12 bits
-	  data = data + 2048; // centrar en 2048
-	  i++;
 
-	  if (i >= 24)
-	  {
-		  i = 0;
-		  available = 0;
-	  }
-	  HAL_DAC_SetValue(&hdac1, DAC1_CHANNEL_2, DAC_ALIGN_12B_R,
-			  (unsigned short int) data);
-  }
-  __HAL_TIM_CLEAR_IT(&htim7, TIM_IT_UPDATE);
   /* USER CODE END TIM7_IRQn 0 */
-  //HAL_TIM_IRQHandler(&htim7);
+  HAL_TIM_IRQHandler(&htim7);
   /* USER CODE BEGIN TIM7_IRQn 1 */
 
   /* USER CODE END TIM7_IRQn 1 */

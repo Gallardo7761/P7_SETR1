@@ -62,13 +62,13 @@
   * @{
   */
 
-#define USBD_VID     1155
+#define USBD_VID     1157
 #define USBD_LANGID_STRING     1033
 #define USBD_MANUFACTURER_STRING     "STMicroelectronics"
-#define USBD_PID_FS     22336
-#define USBD_PRODUCT_STRING_FS     "STM32 Audio Class"
-#define USBD_CONFIGURATION_STRING_FS     "AUDIO Config"
-#define USBD_INTERFACE_STRING_FS     "AUDIO Interface"
+#define USBD_PID_FS     22354
+#define USBD_PRODUCT_STRING_FS     "SETR MIDI"
+#define USBD_CONFIGURATION_STRING_FS     "SETR MIDI Config"
+#define USBD_INTERFACE_STRING_FS     "SETR MIDI Interface"
 
 #define USB_SIZ_BOS_DESC            0x0C
 

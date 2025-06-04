@@ -12,7 +12,8 @@ RM := rm -rf
 -include USB_DEVICE/Target/subdir.mk
 -include USB_DEVICE/App/subdir.mk
 -include Middlewares/ST/STM32_USB_Device_Library/Core/Src/subdir.mk
--include Middlewares/ST/STM32_USB_Device_Library/Class/AUDIO/Src/subdir.mk
+-include Middlewares/ST/STM32_USB_Device_Library/Class/MIDI/Src/subdir.mk
+-include Middlewares/ST/STM32_USB_Device_Library/Class/CustomHID/Src/subdir.mk
 -include Drivers/STM32L4xx_HAL_Driver/Src/subdir.mk
 -include Core/Startup/subdir.mk
 -include Core/Src/subdir.mk
@@ -38,34 +39,34 @@ $(wildcard ../makefile.init) \
 $(wildcard ../makefile.targets) \
 
 
-BUILD_ARTIFACT_NAME := P7_SETR1
+BUILD_ARTIFACT_NAME := P7_MIDI_SETR1
 BUILD_ARTIFACT_EXTENSION := elf
 BUILD_ARTIFACT_PREFIX :=
 BUILD_ARTIFACT := $(BUILD_ARTIFACT_PREFIX)$(BUILD_ARTIFACT_NAME)$(if $(BUILD_ARTIFACT_EXTENSION),.$(BUILD_ARTIFACT_EXTENSION),)
 
 # Add inputs and outputs from these tool invocations to the build variables 
 EXECUTABLES += \
-P7_SETR1.elf \
+P7_MIDI_SETR1.elf \
 
 MAP_FILES += \
-P7_SETR1.map \
+P7_MIDI_SETR1.map \
 
 SIZE_OUTPUT += \
 default.size.stdout \
 
 OBJDUMP_LIST += \
-P7_SETR1.list \
+P7_MIDI_SETR1.list \
 
 
 # All Target
 all: main-build
 
 # Main-build Target
-main-build: P7_SETR1.elf secondary-outputs
+main-build: P7_MIDI_SETR1.elf secondary-outputs
 
 # Tool invocations
-P7_SETR1.elf P7_SETR1.map: $(OBJS) $(USER_OBJS) /home/jomaa/STM32CubeIDE/workspace_1.18.0/P7_SETR1/STM32L475VGTX_FLASH.ld makefile objects.list $(OPTIONAL_TOOL_DEPS)
-	arm-none-eabi-gcc -o "P7_SETR1.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m4 -T"/home/jomaa/STM32CubeIDE/workspace_1.18.0/P7_SETR1/STM32L475VGTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="P7_SETR1.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -u _printf_float -Wl,--start-group -lc -lm -Wl,--end-group
+P7_MIDI_SETR1.elf P7_MIDI_SETR1.map: $(OBJS) $(USER_OBJS) C:\Users\jomaa\STM32CubeIDE\workspace_1.18.1\P7_MIDI_SETR1\STM32L475VGTX_FLASH.ld makefile objects.list $(OPTIONAL_TOOL_DEPS)
+	arm-none-eabi-gcc -o "P7_MIDI_SETR1.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m4 -T"C:\Users\jomaa\STM32CubeIDE\workspace_1.18.1\P7_MIDI_SETR1\STM32L475VGTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="P7_MIDI_SETR1.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -u _printf_float -Wl,--start-group -lc -lm -Wl,--end-group
 	@echo 'Finished building target: $@'
 	@echo ' '
 
@@ -74,14 +75,14 @@ default.size.stdout: $(EXECUTABLES) makefile objects.list $(OPTIONAL_TOOL_DEPS)
 	@echo 'Finished building: $@'
 	@echo ' '
 
-P7_SETR1.list: $(EXECUTABLES) makefile objects.list $(OPTIONAL_TOOL_DEPS)
-	arm-none-eabi-objdump -h -S $(EXECUTABLES) > "P7_SETR1.list"
+P7_MIDI_SETR1.list: $(EXECUTABLES) makefile objects.list $(OPTIONAL_TOOL_DEPS)
+	arm-none-eabi-objdump -h -S $(EXECUTABLES) > "P7_MIDI_SETR1.list"
 	@echo 'Finished building: $@'
 	@echo ' '
 
 # Other Targets
 clean:
-	-$(RM) P7_SETR1.elf P7_SETR1.list P7_SETR1.map default.size.stdout
+	-$(RM) P7_MIDI_SETR1.elf P7_MIDI_SETR1.list P7_MIDI_SETR1.map default.size.stdout
 	-@echo ' '
 
 secondary-outputs: $(SIZE_OUTPUT) $(OBJDUMP_LIST)
